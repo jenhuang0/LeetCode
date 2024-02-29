@@ -1,6 +1,7 @@
 class Solution:
     def maxSlidingWindow(self, nums: List[int], k: int) -> List[int]:
-        
+        if k == 1:
+            return nums
         ans = []
         max_stack = deque()
 
@@ -11,7 +12,7 @@ class Solution:
             max_stack.append(i)
             #ensure queue is only holding the index of current window
             if max_stack[0] <= i - k:
-                max_stack.popleft
+                max_stack.popleft()
             if i>=k-1:
                 ans.append(nums[max_stack[0]])
 
