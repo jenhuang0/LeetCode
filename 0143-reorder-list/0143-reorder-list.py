@@ -14,24 +14,25 @@ class Solution:
             slow = slow.next
             fast = fast.next.next
 
-        #reverse second half
+        #reverse second list
         second = slow.next
-        slow.next = None
+        slow.next = None #cut the link
         prev = None
         while second:
-            tmp = second.next
+            temp = second.next
             second.next = prev
             prev = second
-            second = tmp
-        
-        #merge two half
+            second = temp
+
+        #merge two
         second = prev
-        first = head
+        first= head
         while second:
-            temp1 = first.next
-            temp2 = second.next
+            temp1 =first.next
+            temp2 =second.next
             first.next = second
             second.next = temp1
             first = temp1
             second = temp2
+        
         
