@@ -14,5 +14,6 @@ class Solution:
             if not (leftB <node.val <rightB):
                 return False
             
-            return valid(node.left, leftB, node.val) and valid(node.right, node.val, rightB)
+            if (valid(node.left, leftB, node.val) and valid(node.right, node.val, rightB)):
+                return True
         return valid(root, float("-inf"), float("inf"))
