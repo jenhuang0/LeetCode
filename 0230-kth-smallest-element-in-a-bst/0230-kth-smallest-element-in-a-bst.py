@@ -6,19 +6,17 @@
 #         self.right = right
 class Solution:
     def kthSmallest(self, root: Optional[TreeNode], k: int) -> int:
-        # we know you can track the smaller number from it's tree's left node. 
-        # so we can keep tracking the smaller number until the tracking time is equal to k 
+        arr = []
+        arr = self.kthHelper(root, arr)
+        return arr[k-1]
+    
+    def kthHelper(self, root: Optional[TreeNode], arr: List[int]) -> List[int]:
+        if not root:
+            return arr
+        
+        self.kthHelper(root.left, arr)
+        arr.append(root.val)
+        self.kthHelper(root.right, arr)
 
-        stack = []
-        curr = root
-        n = 0
-
-        while curr or stack:
-            while curr:
-                stack.append(curr)
-                curr = curr.left
-            curr = stack.pop()
-            n += 1
-            if n == k:
-                return curr.val
-            curr = curr.right
+        return arr
+        
