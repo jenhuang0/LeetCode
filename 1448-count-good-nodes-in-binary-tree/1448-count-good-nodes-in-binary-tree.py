@@ -7,21 +7,19 @@
 class Solution:
     def goodNodes(self, root: TreeNode) -> int:
         good = [0]
+
         def dfs(node, max_val):
-            if not node:
+            if node is None:
                 return 0
-            #check if the curr code is a good node
-            if node.val >= max_val:
+            
+            #check if node is good
+            if node.val>=max_val:
                 good[0]+=1
             
-            #update the max_val
+            #update max
             max_val = max(node.val, max_val)
 
-            # recur traverse the left and right subtrees
             dfs(node.left, max_val)
             dfs(node.right, max_val)
         dfs(root, root.val)
         return good[0]
-            
-            
-        
