@@ -1,19 +1,16 @@
 class Solution:
     def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
-        # our goal is to find if there's a loop in the graph (topological sort)
-        # in order to do that, is we first look for the node that dont have previous edge
-        # we can use indegree to track each node's being pointed edge
-        indegree = [0] * numCourses  #track the edge of the node is pointed(index = node, val = edge)
-        adj = [[] for x in range(numCourses)]
+        indegree = [0] * numCourses # edge of each node
+        adj = [[]for i in range(numCourses)] #each node's pre
 
-        for prereq in prerequisites:
-            adj[prereq[1]].append(prereq[0])
-            indegree[prereq[0]] += 1
+        for pre in prerequisites:
+            adj[pre[1]].append(pre[0])
+            indegree[pre[0]] += 1 #edge going to that node
         queue = []
+        #search for the node that doesnt have any edge going into 
         for i in range(numCourses):
             if indegree[i] == 0:
                 queue.append(i)
-
         visited = 0
         while queue:
             node = queue.pop(0)
