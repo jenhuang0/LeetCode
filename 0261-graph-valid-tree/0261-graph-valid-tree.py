@@ -8,16 +8,18 @@ class Solution:
         
         visited = set()
         queue = deque([0])
-        
+        parent = {}
+        parent[0] = -1
         while queue:
             node = queue.popleft()
             visited.add(node)
             for neighbor in adj_list[node]:
-                if neighbor in visited:
+                if neighbor == parent[node]:
                     continue
+                if neighbor in visited:
+                    return False
+                parent[neighbor] = node
                 visited.add(neighbor)
                 queue.append(neighbor)
-        
-        # Check if all nodes are visited
-        return len(visited) == n and len(edges) == n - 1
-
+        return True if len(visited) == n else False
+ 
