@@ -1,14 +1,15 @@
 class Solution:
     def validTree(self, n: int, edges: List[List[int]]) -> bool:
-        adj = [[] for i in range(n)]
+        adj= [[] for i in range(n)]
 
-        for a, v in edges:
-            adj[a].append(v)
-            adj[v].append(a)
+        for v, u in edges:
+            adj[v].append(u)
+            adj[u].append(v)
 
+        
         visited = set()
         parent = {}
-        q = deque([0])
+        q=deque([0])
         parent[0] = -1
 
         while q:
@@ -19,9 +20,7 @@ class Solution:
                     continue
                 if nei in visited:
                     return False
-                parent[nei] = node
                 q.append(nei)
-                visited.add(nei)
-        print(visited)
-        print(n)
+                parent[nei] = node
+
         return len(visited) == n
